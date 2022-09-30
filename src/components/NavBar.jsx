@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const NavBar = () => {
   return (
-    <Navbar bg="primary" variant="dark">
+    <Navbar bg="dark" variant="dark">
     <Container>
       <Navbar.Brand to="/" as={Link} >E-commerce</Navbar.Brand>
       <Nav className="me-auto">

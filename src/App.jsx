@@ -10,11 +10,21 @@ import Purchases from "./pages/Purchases"
 import ProductsDetail from "./pages/ProductsDetail"
 import NavBar from './components/NavBar'
 import LoadingScreen from './components/LoadingScreen'
-import {useSelector} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
+import { getProductsThunk } from './store/slices/Products.slice'
+import { useEffect } from 'react'
 
 function App() {
 
   const isloading = useSelector(state => state.isloading)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getProductsThunk())
+  }, [])
+
+
+
   return (
     <HashRouter>
       <NavBar />
