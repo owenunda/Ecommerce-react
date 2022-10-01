@@ -17,6 +17,11 @@ const Home = () => {
   const [categories, setCategories] = useState([])
   const [productsFilter, setProductsFilert] = useState([])
   const [searchProduct, setSearchProduct] = useState("")
+
+
+  const [searchFrom, setSearcFrom] = useState("")
+  const [searchTo, setSearcTo] = useState("")
+
   //console.log(productsList);
 
 
@@ -35,6 +40,12 @@ const Home = () => {
   const seacrhProdcuts = () => {
       let filter = productsList.filter(products => products.title.includes(searchProduct))
       setProductsFilert(filter)
+  }
+  const priceFilter = () => {
+    let filter = productsList.filter(products => {
+      return products.price >= searchFrom && products.price <= searchTo
+    })
+    setProductsFilert(filter)
   }
 
 
@@ -55,7 +66,51 @@ const Home = () => {
       }
       </div>
       <div>
-        
+
+
+
+
+
+
+
+
+
+
+
+
+      <InputGroup className="mb-3">
+        <Form.Control
+          placeholder="From"
+          value={searchFrom}
+          type="number"
+          onChange={(e) => setSearcFrom(e.target.value)}
+        />
+        <Form.Control
+          placeholder="to"
+          value={searchTo}
+          type="number" 
+          onChange={(e) => setSearcTo(e.target.value)}
+        />
+
+
+
+
+        <Button variant="outline-secondary" id="button-addon2" onClick={priceFilter}>
+          filter Price
+        </Button>
+      </InputGroup>
+
+
+
+
+
+
+
+
+
+
+
+
       <InputGroup className="mb-3">
         <Form.Control
           placeholder="search products"
