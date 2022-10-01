@@ -5,7 +5,6 @@ import { getProductsThunk } from '../store/slices/Products.slice';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
-
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 
@@ -15,10 +14,13 @@ const Home = () => {
   const productsList = useSelector(state => state.products)
   const navigate = useNavigate()
   const [categories, setCategories] = useState([])
+  
+  
   const [productsFilter, setProductsFilert] = useState([])
+  
+  
+  
   const [searchProduct, setSearchProduct] = useState("")
-
-
   const [searchFrom, setSearcFrom] = useState("")
   const [searchTo, setSearcTo] = useState("")
 
@@ -30,17 +32,24 @@ const Home = () => {
     axios.get("https://ecommerce-api-react.herokuapp.com/api/v1/products/categories")
       .then(res => setCategories(res.data.data.categories))
   }, [])
+
   useEffect(() =>{
     setProductsFilert(productsList)
   },[productsList])
+
+
+
   const filterCategory = (categoryId) => {
     let filter = productsList.filter( products => products.category.id === categoryId )
     setProductsFilert(filter)
   }
+
+  
   const seacrhProdcuts = () => {
       let filter = productsList.filter(products => products.title.includes(searchProduct))
       setProductsFilert(filter)
   }
+
   const priceFilter = () => {
     let filter = productsList.filter(products => {
       return products.price >= searchFrom && products.price <= searchTo
@@ -66,18 +75,6 @@ const Home = () => {
       }
       </div>
       <div>
-
-
-
-
-
-
-
-
-
-
-
-
       <InputGroup className="mb-3">
         <Form.Control
           placeholder="From"
@@ -91,26 +88,10 @@ const Home = () => {
           type="number" 
           onChange={(e) => setSearcTo(e.target.value)}
         />
-
-
-
-
         <Button variant="outline-secondary" id="button-addon2" onClick={priceFilter}>
           filter Price
         </Button>
       </InputGroup>
-
-
-
-
-
-
-
-
-
-
-
-
       <InputGroup className="mb-3">
         <Form.Control
           placeholder="search products"
@@ -122,6 +103,8 @@ const Home = () => {
         </Button>
       </InputGroup>
       </div>
+
+
         {
           productsFilter?.map(product => (
             <Card key={product.id}  className="w-25 mb-5" onClick={() => navigate(`/product/${product.id}`)} >
