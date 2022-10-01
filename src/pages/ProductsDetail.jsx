@@ -9,8 +9,8 @@ const ProductsDetail = () => {
   const productsList = useSelector(state => state.products)
 
   const productDetail = productsList.find(product => product.id === +id)
-
-  console.log(productDetail)
+  const suggestionProduct = productsList.filter(product => product.category.id === productDetail.category.id)
+  console.log(suggestionProduct)
 
 
   return (
@@ -40,7 +40,13 @@ const ProductsDetail = () => {
           />
         </Carousel.Item>
       </Carousel>
-
+      <div>
+      {
+        suggestionProduct.map(product => (
+          <h1>{product.title} </h1>
+        ))
+      }
+      </div>
     </div>
   );
 };
